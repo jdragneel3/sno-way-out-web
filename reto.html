@@ -49,7 +49,8 @@
     }
     if (/Android/i.test(navigator.userAgent)) {
       // Abre el juego si está instalado; si no, Chrome va a Google Play.
-      location.href = "intent://reto#Intent;scheme=snowayout;package=com.unjuegomas.snowayout;S.browser_fallback_url=" + encodeURIComponent(STORE) + ";end";
+      const q = m ? "?c=" + encodeURIComponent(code) + "&n=" + encodeURIComponent(name) : "";
+      location.href = "intent://reto" + q + "#Intent;scheme=snowayout;package=com.unjuegomas.snowayout;S.browser_fallback_url=" + encodeURIComponent(STORE) + ";end";
     } else {
       location.href = STORE;
     }
