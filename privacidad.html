@@ -26,7 +26,6 @@
   <div class="legal-head"><h1>Política de privacidad</h1><span class="updated">Última actualización: 12 de noviembre de 2026</span></div>
   <article class="legal">
     <p>Sno-Way Out (el «juego») es un juego para Android de <strong>UnJuegomas</strong> («nosotros»). Esta política explica qué datos trata el juego, para qué y qué puedes hacer con ellos.</p>
-    <!-- VERIFICAR: el texto anterior de docs/privacidad.md nombraba como desarrollador a «Jonathan García Téllez». Aquí se usa «UnJuegomas». Confirmar con el titular real (persona física o empresa) y poner el nombre legal exacto como responsable del tratamiento. -->
 <p class="note">Este documento describe lo que hace el juego, escrito con la mayor claridad posible. No constituye asesoría legal.</p>
     <nav class="toc" aria-label="Índice"><strong>Índice</strong><ol>
       <li><a href="#resumen">En pocas palabras</a></li>
@@ -55,7 +54,6 @@
 
       <h3>Edad</h3>
       <p>Al primer arranque, el juego te pide indicar tu edad con un deslizador. Solo se conserva un grupo (menor de 13, de 13 a 17, o adulto). Se guarda en el dispositivo y se envía como parámetro del evento de analítica «terms_accepted». En el código del juego revisado no se usa para configurar el tratamiento de los anuncios.</p>
-      <!-- VERIFICAR: la política anterior decía que, si el jugador indica una edad menor, los anuncios se tratan como no personalizados. En el código (ads.gd, ads_admob.gd) NO existe esa lógica: age_group no se pasa a AdMob (no hay etiqueta de tratamiento dirigido a niños ni de menor de edad). Se ha retirado la afirmación. Decidir si se implementa y entonces reflejarlo. -->
 
       <h3>Sesión anónima y reto diario (Firebase)</h3>
       <p>Cuando envías tu resultado al <strong>reto diario</strong>, el juego inicia una sesión anónima con Firebase Authentication (sin correo ni contraseña), que genera un identificador anónimo por instalación y un token que se guarda en tu dispositivo. En la base de datos Cloud Firestore se guarda, por cada día en que participas: tu <strong>apodo</strong> (hasta 16 caracteres), tus <strong>metros</strong>, la <strong>hora del servidor</strong> y ese identificador anónimo (que es el nombre del registro).</p>
@@ -63,16 +61,12 @@
 
       <h3>Analítica de juego</h3>
       <p>El juego envía eventos a Google Analytics para Firebase mediante su Protocolo de Medición (HTTP, sin el SDK de Firebase). Cada envío incluye un identificador aleatorio de instalación creado por el juego y un identificador de sesión, y eventos como: apertura de sesión (plataforma y modelo de dispositivo), partidas (metros, duración, causa de la caída, monedas, rendimiento en fotogramas por segundo), pantallas visitadas, uso de anuncios con recompensa, rescates, compras, compartir y el grupo de edad indicado. Los envíos se marcan con anuncios no personalizados («non_personalized_ads»). No incluyen tu nombre, correo ni contactos.</p>
-      <!-- VERIFICAR: en el código revisado (analytics.gd) la analítica se envía siempre, sin interruptor para el jugador y sin esperar al formulario de consentimiento UMP. Si se distribuye en la UE/EEE/Reino Unido, el titular debe valorar si necesita pedir consentimiento antes de enviar analítica. Aquí solo se describe lo que hace. -->
-      <!-- VERIFICAR: lista exacta de eventos y que la subida a Firebase esté activa en la versión publicada (depende de data/services.json, que no está en git). -->
 
       <h3>Remote Config</h3>
       <p>Al abrir el juego se consulta Firebase Remote Config para recibir ajustes (dificultad, frecuencia de anuncios, premios). Para ello se envía el identificador de instalación, el identificador de la app y el nombre del paquete. Se guarda una copia de los ajustes en tu dispositivo.</p>
 
       <h3>Anuncios (Google AdMob)</h3>
       <p>El juego muestra anuncios con recompensa (opcionales: tú decides si verlos) y anuncios entre partidas (no se muestran si compras «Quitar anuncios»). Los sirve Google AdMob, que puede tratar el identificador de publicidad de tu dispositivo, la dirección IP y datos del dispositivo y de la interacción con el anuncio, según la <a href="https://policies.google.com/privacy" rel="noopener">política de privacidad de Google</a>. En los países donde la ley lo exige, antes del primer anuncio se muestra el formulario de consentimiento de Google (UMP). Puedes restablecer o borrar tu identificador de publicidad en los ajustes de Android.</p>
-      <!-- VERIFICAR: no se encontró en el código ninguna etiqueta de «dirigido a niños» ni de «menor de edad» para AdMob, ni opción dentro del juego para reabrir/cambiar el consentimiento UMP. Confirmar la configuración en la consola de AdMob y si se quiere ofrecer esa opción. -->
-      <!-- VERIFICAR: permiso AD_ID (identificador de publicidad) y declaración de «Seguridad de los datos» en Google Play deben coincidir con este texto. -->
 
       <h3>Compras (Google Play Billing)</h3>
       <p>Existe un único producto: «Quitar anuncios» (compra única). El pago lo gestiona Google Play; nosotros no recibimos ni vemos tus datos de pago. El juego consulta a Google Play si tienes la compra, para activarla y confirmarla (incluido el token de compra que Google necesita para reconocerla), y así se recupera si reinstalas o cambias de teléfono.</p>
@@ -85,23 +79,19 @@
 
       <h3>Compartir imágenes</h3>
       <p>Las imágenes de partida (por ejemplo la foto al caer) se generan en tu dispositivo y solo salen de él si eliges compartirlas con el menú del sistema.</p>
-      <!-- VERIFICAR: comprobar el flujo completo de «foto de caída» (main.gd: _snap_death_photo, _show_death_photo, _share_sheet_image) para confirmar que no se guarda en la galería ni se sube a ningún servidor propio. -->
 
       <h3>Esta página web</h3>
       <p>Este sitio está alojado en GitHub Pages. No usa cookies ni analítica propia. GitHub, como proveedor de alojamiento, puede registrar datos técnicos de la visita (como la dirección IP) según su propia política. La página de reto (<code>reto.html</code>) no envía ningún dato: solo, al pulsar el botón, copia al portapapeles el texto del reto y abre el juego o Google Play.</p>
-      <!-- VERIFICAR: confirmar que se mantiene la ausencia de cookies/analítica en el sitio. -->
 
     </section>
     <section id="no" aria-labelledby="no-h" style="padding:0"><h2 id="no-h">3. Qué no recogemos</h2>
 
       <p>No pedimos ni recogemos tu nombre real, correo electrónico, teléfono, contactos, ubicación, fotos ni archivos. El juego no solicita permisos de cámara, micrófono, ubicación ni almacenamiento externo (solo vibración, además de los permisos que añaden los servicios descritos, como conexión a internet y notificaciones).</p>
-      <!-- VERIFICAR: revisar el AndroidManifest final exportado para confirmar la lista real de permisos (INTERNET, POST_NOTIFICATIONS, AD_ID, BILLING, etc.). -->
     </section>
     <section id="terceros" aria-labelledby="terceros-h" style="padding:0"><h2 id="terceros-h">4. Con quién se comparten</h2>
 
       <p>Los datos se envían a <strong>Google</strong>, que actúa como proveedor de los servicios descritos: Firebase (Authentication, Cloud Firestore, Remote Config), Google Analytics, AdMob y Google Play. Puedes ver cómo trata Google los datos en su <a href="https://policies.google.com/privacy" rel="noopener">política de privacidad</a>. No vendemos tus datos. El apodo y los metros del reto diario son públicos en el ranking del juego.</p>
       <p>Google puede tratar datos en servidores fuera de tu país.</p>
-      <!-- VERIFICAR: región de la base de datos Firestore y condiciones de transferencia internacional aplicables. -->
     </section>
     <section id="conserv" aria-labelledby="conserv-h" style="padding:0"><h2 id="conserv-h">5. Cuánto tiempo se conservan</h2>
 
@@ -109,12 +99,10 @@
         <li><strong>En tu dispositivo:</strong> hasta que desinstales el juego o borres sus datos desde los ajustes de Android.</li>
         <li><strong>Ranking del reto diario, analítica y ajustes remotos:</strong> se conservan en los servicios de Google mientras sean necesarios para el funcionamiento y mejora del juego, o hasta que se solicite su borrado.</li>
       </ul>
-      <!-- VERIFICAR: no hay en el código ninguna regla de borrado automático (los registros diarios del ranking no se eliminan). Definir plazos reales (retención en Google Analytics, limpieza de Firestore) antes de afirmar cifras concretas. -->
     </section>
     <section id="menores" aria-labelledby="menores-h" style="padding:0"><h2 id="menores-h">6. Menores</h2>
 
       <p>El juego está pensado para mayores de 13 años o con permiso de su madre, padre o tutor (ver los <a href="terminos.html">Términos de uso</a>). Al empezar, el juego pregunta la edad (deslizador de 5 a 60 o más años), con fines de anuncios y analítica, y guarda solo el grupo de edad. El juego no bloquea el acceso según la edad indicada.</p>
-      <!-- VERIFICAR: el deslizador permite indicar desde 5 años y no hay bloqueo para menores de 13, mientras los Términos exigen 13 años. Decidir la política real (¿bloquear, pedir tutor, ajustar anuncios?) y las implicaciones de las normas de Google Play para menores antes de publicar. -->
       <p>Si eres madre, padre o tutor y crees que un menor ha usado un apodo con datos personales en el ranking o quieres pedir el borrado de sus datos, escríbenos (ver «Tus derechos»).</p>
     </section>
     <section id="derechos" aria-labelledby="derechos-h" style="padding:0"><h2 id="derechos-h">7. Tus derechos y cómo ejercerlos</h2>
@@ -122,7 +110,6 @@
       <p>Según la normativa de protección de datos que te sea aplicable, puedes pedir acceso, rectificación, supresión, limitación u oposición al tratamiento de tus datos y, en su caso, su portabilidad.</p>
       <h3>Pedir el borrado de tus datos</h3>
       <p>Escribe a <a href="mailto:unjuegomas92@gmail.com?subject=Borrado%20de%20datos%20Sno-Way%20Out">unjuegomas92@gmail.com</a> con el asunto «Borrado de datos». Indica el <strong>apodo</strong> que usaste en el reto diario y, si lo recuerdas, los días en que jugaste y tus metros, para que podamos localizar tu registro. Borraremos tu registro del ranking.</p>
-      <!-- VERIFICAR: el juego no muestra al jugador su identificador anónimo (Firebase / analítica), por lo que localizar datos de analítica por correo puede no ser posible. Valorar mostrar el identificador en Ajustes o definir otro procedimiento; y definir el plazo de respuesta (no se ha inventado ninguno). -->
       <h3>Otras opciones</h3>
       <ul>
         <li><strong>Borrar los datos locales:</strong> desinstala el juego o borra sus datos en los ajustes de Android.</li>
