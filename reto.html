@@ -42,10 +42,11 @@
   } else {
     document.getElementById("go").textContent = "Abrir Sno-Way Out";
   }
-  document.getElementById("go").addEventListener("click", async () => {
-    // Se copia el reto con el mismo formato que usa el juego para leerlo al abrirse.
+  document.getElementById("go").addEventListener("click", () => {
+    // Nada de "await" antes de navegar: Chrome solo abre apps (intent://) mientras el toque sigue "fresco".
+    // El reto se copia con el mismo formato que usa el juego para leerlo al abrirse (sin esperar la respuesta).
     if (m) {
-      try { await navigator.clipboard.writeText(name + " te reta en Sno-Way Out: " + code); } catch (e) {}
+      try { navigator.clipboard.writeText(name + " te reta en Sno-Way Out: " + code).catch(() => {}); } catch (e) {}
     }
     if (/Android/i.test(navigator.userAgent)) {
       // Abre el juego si está instalado; si no, Chrome va a Google Play.
