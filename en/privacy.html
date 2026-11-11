@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy – Sno-Way Out</title>
+<meta name="description" content="What data Sno-Way Out handles, why, and how to exercise your rights.">
+<meta name="theme-color" content="#8fd0ff">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://jdragneel3.github.io/sno-way-out-web/en/privacy.html">
+<link rel="alternate" hreflang="es" href="https://jdragneel3.github.io/sno-way-out-web/privacidad.html">
+<link rel="alternate" hreflang="en" href="https://jdragneel3.github.io/sno-way-out-web/en/privacy.html">
+<link rel="alternate" hreflang="x-default" href="https://jdragneel3.github.io/sno-way-out-web/privacidad.html">
+<link rel="icon" type="image/png" href="../assets/icons/favicon-64.png">
+<link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+<link rel="preload" href="../assets/fonts/Fredoka.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap top">
+  <a class="brand" href="index.html" aria-label="Sno-Way Out, home"><img src="../assets/img/icon-192.webp" alt="" width="44" height="44"><span>Sno-Way Out</span></a>
+  <div class="lang" role="group" aria-label="Language"><a href="../privacidad.html" hreflang="es" lang="es" aria-label="Español">ES</a><span aria-current="true">EN</span></div>
+</header>
+<main id="main" class="wrap narrow">
+  <div class="legal-head"><h1>Privacy Policy</h1><span class="updated">Last updated: November 12, 2026</span></div>
+  <article class="legal">
+    <p>Sno-Way Out (the "game") is an Android game by <strong>UnJuegomas</strong> ("we"). This policy explains what data the game handles, why, and what you can do about it.</p>
+<p class="note">This document describes what the game does, as clearly as possible. It is not legal advice.</p>
+    <nav class="toc" aria-label="Contents"><strong>Contents</strong><ol>
+      <li><a href="#summary">In short</a></li>
+      <li><a href="#data">What data the game handles</a></li>
+      <li><a href="#not">What we don't collect</a></li>
+      <li><a href="#sharing">Who it is shared with</a></li>
+      <li><a href="#retention">How long data is kept</a></li>
+      <li><a href="#children">Children</a></li>
+      <li><a href="#rights">Your rights and how to use them</a></li>
+      <li><a href="#changes">Changes and contact</a></li>
+    </ol></nav>
+    <section id="summary" aria-labelledby="summary-h" style="padding:0"><h2 id="summary-h">1. In short</h2>
+
+      <ul>
+        <li>There are no accounts, emails or sign-up. Your progress (coins, outfits, records) is stored on your device.</li>
+        <li>If you play the <strong>daily challenge</strong>, your nickname and your meters are published in a leaderboard visible to everyone.</li>
+        <li>The game sends <strong>usage analytics</strong> tied to a random identifier, and shows <strong>ads</strong> from Google AdMob.</li>
+        <li>We don't ask for camera, microphone, location, contacts or storage access.</li>
+        <li>You can request deletion of your data by writing to unjuegomas92@gmail.com.</li>
+      </ul>
+    </section>
+    <section id="data" aria-labelledby="data-h" style="padding:0"><h2 id="data-h">2. What data the game handles</h2>
+
+      <h3>Profile and progress (on your device only)</h3>
+      <p>Coins, outfits, records, missions, settings, the nickname you choose (otherwise "Esquiador") and an age group (see below). They are kept in a local game file and are deleted when you uninstall the game.</p>
+
+      <h3>Age</h3>
+      <p>On first launch the game asks you to set your age with a slider. Only a group is kept (under 13, 13 to 17, or adult). It is stored on the device and sent as a parameter of the "terms_accepted" analytics event. In the game code reviewed, it is not used to configure how ads are handled.</p>
+
+      <h3>Anonymous session and daily challenge (Firebase)</h3>
+      <p>When you submit your result to the <strong>daily challenge</strong>, the game starts an anonymous session with Firebase Authentication (no email or password), which creates an anonymous per-installation identifier and a token stored on your device. In the Cloud Firestore database, for each day you take part, we store your <strong>nickname</strong> (up to 16 characters), your <strong>meters</strong>, the <strong>server time</strong> and that anonymous identifier (which is the record's name).</p>
+      <p>The leaderboard publicly shows the day's top 20 with their nickname and meters. <strong>Do not use your real name or personal information as a nickname.</strong> When you claim the previous day's reward, the game queries that leaderboard and your record using your identifier.</p>
+
+      <h3>Game analytics</h3>
+      <p>The game sends events to Google Analytics for Firebase through its Measurement Protocol (HTTP, without the Firebase SDK). Each request includes a random installation identifier created by the game and a session identifier, and events such as: session start (platform and device model), runs (meters, duration, cause of the fall, coins, frames-per-second performance), screens visited, rewarded ad usage, rescues, purchases, sharing, and the age group you chose. Requests are flagged as non-personalized ads ("non_personalized_ads"). They do not include your name, email or contacts.</p>
+
+      <h3>Remote Config</h3>
+      <p>When the game opens, it queries Firebase Remote Config for settings (difficulty, ad frequency, rewards). This sends the installation identifier, the app identifier and the package name. A copy of the settings is stored on your device.</p>
+
+      <h3>Ads (Google AdMob)</h3>
+      <p>The game shows rewarded ads (optional: you decide whether to watch them) and ads between runs (not shown if you buy "Remove ads"). They are served by Google AdMob, which may process your device's advertising ID, IP address, and device and ad-interaction data, under <a href="https://policies.google.com/privacy" rel="noopener">Google's privacy policy</a>. Where the law requires it, Google's consent form (UMP) is shown before the first ad. You can reset or delete your advertising ID in Android settings.</p>
+
+      <h3>Purchases (Google Play Billing)</h3>
+      <p>There is a single product: "Remove ads" (one-time purchase). Google Play handles the payment; we do not receive or see your payment details. The game asks Google Play whether you own the purchase in order to enable and acknowledge it (including the purchase token Google needs to acknowledge it), so it is restored if you reinstall or change phones.</p>
+
+      <h3>Notifications</h3>
+      <p>Notifications (chest ready, missions, daily gift) are scheduled <strong>locally on your device</strong>: no data is sent to any server for them. On Android 13 or later, the system asks for permission when you accept the welcome screen. You can turn them off in the game's Settings or in system settings.</p>
+
+      <h3>Clipboard and friend challenges</h3>
+      <p>When the title screen opens, the game may read the clipboard <strong>only</strong> to detect a challenge code of the form "SNO-…" (if the text is under 600 characters and contains it). If found, it offers you to accept the challenge. The clipboard content is not stored or sent to any server; only the challenge code is extracted. When you share a challenge, the game copies a text containing the code to the clipboard and opens the system share sheet: you decide with whom and where it is shared.</p>
+
+      <h3>Sharing images</h3>
+      <p>Run images (for example the photo when you fall) are generated on your device and leave it only if you choose to share them from the system sheet.</p>
+
+      <h3>This website</h3>
+      <p>This site is hosted on GitHub Pages. It uses no cookies and no analytics of its own. GitHub, as the hosting provider, may log technical data about your visit (such as the IP address) under its own policy. The challenge page (<code>reto.html</code>) sends no data: when you press the button it only copies the challenge text to the clipboard and opens the game or Google Play.</p>
+
+    </section>
+    <section id="not" aria-labelledby="not-h" style="padding:0"><h2 id="not-h">3. What we don't collect</h2>
+
+      <p>We don't ask for or collect your real name, email address, phone number, contacts, location, photos or files. The game does not request camera, microphone, location or external storage permissions (only vibration, in addition to permissions added by the services described, such as internet access and notifications).</p>
+    </section>
+    <section id="sharing" aria-labelledby="sharing-h" style="padding:0"><h2 id="sharing-h">4. Who it is shared with</h2>
+
+      <p>Data is sent to <strong>Google</strong>, which acts as the provider of the services described: Firebase (Authentication, Cloud Firestore, Remote Config), Google Analytics, AdMob and Google Play. You can see how Google handles data in its <a href="https://policies.google.com/privacy" rel="noopener">privacy policy</a>. We do not sell your data. The nickname and meters of the daily challenge are public in the in-game leaderboard.</p>
+      <p>Google may process data on servers outside your country.</p>
+    </section>
+    <section id="retention" aria-labelledby="retention-h" style="padding:0"><h2 id="retention-h">5. How long data is kept</h2>
+
+      <ul>
+        <li><strong>On your device:</strong> until you uninstall the game or clear its data from Android settings.</li>
+        <li><strong>Daily leaderboard, analytics and remote settings:</strong> kept in Google's services for as long as needed to run and improve the game, or until deletion is requested.</li>
+      </ul>
+    </section>
+    <section id="children" aria-labelledby="children-h" style="padding:0"><h2 id="children-h">6. Children</h2>
+
+      <p>The game is intended for people aged 13 or over, or with a parent or guardian's permission (see the <a href="terms.html">Terms of Use</a>). At the start, the game asks for your age (a slider from 5 to 60 or more years) for ads and analytics purposes, and keeps only the age group. The game does not block access based on the age entered.</p>
+      <p>If you are a parent or guardian and believe a minor used a nickname with personal information in the leaderboard, or you want to request deletion of their data, write to us (see "Your rights").</p>
+    </section>
+    <section id="rights" aria-labelledby="rights-h" style="padding:0"><h2 id="rights-h">7. Your rights and how to use them</h2>
+
+      <p>Depending on the data protection rules that apply to you, you may request access, rectification, erasure, restriction of or objection to the processing of your data and, where applicable, portability.</p>
+      <h3>Requesting deletion of your data</h3>
+      <p>Write to <a href="mailto:unjuegomas92@gmail.com?subject=Data%20deletion%20Sno-Way%20Out">unjuegomas92@gmail.com</a> with the subject "Data deletion". Include the <strong>nickname</strong> you used in the daily challenge and, if you remember, the days you played and your meters, so we can locate your record. We will delete your leaderboard record.</p>
+      <h3>Other options</h3>
+      <ul>
+        <li><strong>Delete local data:</strong> uninstall the game or clear its data in Android settings.</li>
+        <li><strong>Ads:</strong> reset or delete your advertising ID in Android settings.</li>
+        <li><strong>Notifications:</strong> turn them off in the game's Settings or system settings.</li>
+        <li><strong>Complaints:</strong> you may contact the data protection authority in your country.</li>
+      </ul>
+    </section>
+    <section id="changes" aria-labelledby="changes-h" style="padding:0"><h2 id="changes-h">8. Changes and contact</h2>
+
+      <p>If this policy changes, we will update this page and the date above. For any question: <a href="mailto:unjuegomas92@gmail.com">unjuegomas92@gmail.com</a>.</p>
+    </section>
+    <p class="back"><a class="btn btn-blue" href="index.html">Back to home</a></p>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <nav aria-label="Contact">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="mailto:unjuegomas92@gmail.com">unjuegomas92@gmail.com</a>
+    </nav>
+    <p>Made by UnJuegomas · © 2026</p>
+    <div class="lang" role="group" aria-label="Language"><a href="../privacidad.html" hreflang="es" lang="es" aria-label="Español">ES</a><span aria-current="true">EN</span></div>
+  </div>
+</footer>
+</body>
+</html>

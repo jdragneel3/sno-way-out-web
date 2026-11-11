@@ -5,42 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Te retaron en Sno-Way Out</title>
 <meta name="description" content="Supera su distancia en la misma pista de Sno-Way Out.">
-<style>
-  :root { --bg:#cfe8ff; --ink:#1d2f5a; --btn:#4bb34f; --btn-dark:#2f8a35; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#16233f; --ink:#eaf2ff; } }
-  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--ink);
-         min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:24px; box-sizing:border-box; }
-  main { max-width:420px; }
-  h1 { font-size:2rem; margin:0 0 8px; }
-  p { font-size:1.1rem; line-height:1.4; }
-  .meters { font-size:3rem; font-weight:800; margin:8px 0; }
-  button { background:var(--btn); color:#fff; border:0; border-bottom:6px solid var(--btn-dark); border-radius:20px; padding:16px 28px;
-           font-size:1.4rem; font-weight:700; cursor:pointer; width:100%; }
-  button:active { border-bottom-width:2px; transform:translateY(4px); }
-  small { display:block; margin-top:16px; opacity:.75; }
-  a { color:inherit; }
-</style>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#8fd0ff">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/png" href="assets/icons/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/Fredoka.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
-<main>
-  <h1 id="title">¡Te han retado!</h1>
-  <p id="who">Alguien quiere que superes su distancia en Sno-Way Out, en su misma pista.</p>
-  <div class="meters" id="meters"></div>
-  <button id="go">Aceptar el reto</button>
-  <small id="hint">Si no tienes el juego, te llevamos a Google Play.</small>
-  <small><a href="index.html">Sno-Way Out</a></small>
+<body class="reto-page">
+<main id="main" class="wrap reto">
+  <img class="logo" src="assets/img/logo.webp" alt="Sno-Way Out" width="720" height="330">
+  <div class="reto-card">
+    <div class="art"><img src="assets/img/reto-banner.webp" alt="" width="840" height="480"></div>
+    <div class="reto-body">
+      <h1 id="title">¡Te han retado!</h1>
+      <p id="who">Alguien quiere que superes su distancia en Sno-Way Out, en su misma pista.</p>
+      <div class="meters" id="meters"></div>
+      <button id="go" class="btn btn-green" type="button">Aceptar el reto</button>
+      <p class="hint" id="hint">Si no tienes el juego, te llevamos a Google Play.</p>
+    </div>
+  </div>
+  <p class="reto-more"><a id="home" href="index.html">Sno-Way Out</a></p>
 </main>
 <script>
   const STORE = "https://play.google.com/store/apps/details?id=com.unjuegomas.snowayout";
+  // Idioma solo para los textos: español salvo que el navegador empiece por "en".
+  const EN = /^en/i.test(navigator.language || "");
+  const TX = EN ? {
+    lang: "en", locale: "en", docTitle: "You've been challenged in Sno-Way Out", title: "You've been challenged!",
+    whoDefault: "Someone wants you to beat their distance in Sno-Way Out, on their exact same slope.",
+    whoNamed: " challenges you: beat their distance on their exact same slope.", friend: "A friend",
+    go: "Accept the challenge", open: "Open Sno-Way Out", hint: "If you don't have the game, we'll take you to Google Play.",
+    desc: "Beat their distance on the same slope in Sno-Way Out."
+  } : {
+    lang: "es", locale: "es", docTitle: "Te retaron en Sno-Way Out", title: "¡Te han retado!",
+    whoDefault: "Alguien quiere que superes su distancia en Sno-Way Out, en su misma pista.",
+    whoNamed: " te reta: supera su distancia en su misma pista.", friend: "Un amigo",
+    go: "Aceptar el reto", open: "Abrir Sno-Way Out", hint: "Si no tienes el juego, te llevamos a Google Play.",
+    desc: "Supera su distancia en la misma pista de Sno-Way Out."
+  };
+  document.documentElement.lang = TX.lang;
+  document.title = TX.docTitle;
+  document.querySelector('meta[name="description"]').setAttribute("content", TX.desc);
+  document.getElementById("title").textContent = TX.title;
+  document.getElementById("who").textContent = TX.whoDefault;
+  document.getElementById("go").textContent = TX.go;
+  document.getElementById("hint").textContent = TX.hint;
+  document.getElementById("home").setAttribute("href", EN ? "en/index.html" : "index.html");
+
   const params = new URLSearchParams(location.search);
   const code = (params.get("c") || "").toUpperCase();
   const name = (params.get("n") || "Un amigo").slice(0, 16);
+  const shown = params.get("n") ? name : TX.friend;
   const m = /^SNO-(\d{1,7})-(\d{1,6})$/.exec(code);
   if (m) {
-    document.getElementById("meters").textContent = Number(m[2]).toLocaleString("es") + " m";
-    document.getElementById("who").textContent = name + " te reta: supera su distancia en su misma pista.";
+    document.getElementById("meters").textContent = Number(m[2]).toLocaleString(TX.locale) + " m";
+    document.getElementById("who").textContent = shown + TX.whoNamed;
   } else {
-    document.getElementById("go").textContent = "Abrir Sno-Way Out";
+    document.getElementById("go").textContent = TX.open;
   }
   document.getElementById("go").addEventListener("click", () => {
     // Nada de "await" antes de navegar: Chrome solo abre apps (intent://) mientras el toque sigue "fresco".
