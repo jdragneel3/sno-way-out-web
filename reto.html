@@ -56,29 +56,47 @@
 
   const params = new URLSearchParams(location.search);
   const code = (params.get("c") || "").toUpperCase();
+  const daily = params.get("d") || "";
   const name = (params.get("n") || "Un amigo").slice(0, 16);
   const shown = params.get("n") ? name : TX.friend;
   const m = /^SNO-(\d{1,7})-(\d{1,6})$/.exec(code);
+  const md = /^(\d{8})-(\d{1,6})$/.exec(daily);
   if (m) {
     document.getElementById("meters").textContent = Number(m[2]).toLocaleString(TX.locale) + " m";
     document.getElementById("who").textContent = shown + TX.whoNamed;
+  } else if (md) {
+    document.getElementById("meters").textContent = Number(md[2]).toLocaleString(TX.locale) + " m";
+    document.getElementById("who").textContent = shown + (EN ? " challenges you to today's daily challenge." : " te reta al reto diario de hoy.");
   } else {
     document.getElementById("go").textContent = TX.open;
   }
-  document.getElementById("go").addEventListener("click", () => {
+  const ANDROID = /Android/i.test(navigator.userAgent);
+  // El reto viaja de dos maneras: en el enlace que abre el juego (si ya está instalado) y en el "referrer"
+  // de Google Play (si hay que instalarlo: el juego lo lee en su primer arranque).
+  const q = m ? "c=" + encodeURIComponent(code) + "&n=" + encodeURIComponent(name)
+          : md ? "d=" + encodeURIComponent(daily) + "&n=" + encodeURIComponent(name) : "";
+  const ref = m ? "reto=" + code + "&n=" + name : md ? "diario=" + daily + "&n=" + name : "";
+  const store = STORE + (ref ? "&referrer=" + encodeURIComponent(ref) : "");
+  const intentUrl = "intent://reto" + (q ? "?" + q : "") + "#Intent;scheme=snowayout;package=com.unjuegomas.snowayout;S.browser_fallback_url=" + encodeURIComponent(store) + ";end";
+  function openGame() {
     // Nada de "await" antes de navegar: Chrome solo abre apps (intent://) mientras el toque sigue "fresco".
-    // El reto se copia con el mismo formato que usa el juego para leerlo al abrirse (sin esperar la respuesta).
+    if (ANDROID) {
+      location.href = intentUrl;  // abre el juego si está instalado; si no, Chrome va a Google Play
+    } else {
+      location.href = store;
+    }
+  }
+  document.getElementById("go").addEventListener("click", () => {
     if (m) {
       try { navigator.clipboard.writeText(name + " te reta en Sno-Way Out: " + code).catch(() => {}); } catch (e) {}
     }
-    if (/Android/i.test(navigator.userAgent)) {
-      // Abre el juego si está instalado; si no, Chrome va a Google Play.
-      const q = m ? "?c=" + encodeURIComponent(code) + "&n=" + encodeURIComponent(name) : "";
-      location.href = "intent://reto" + q + "#Intent;scheme=snowayout;package=com.unjuegomas.snowayout;S.browser_fallback_url=" + encodeURIComponent(STORE) + ";end";
-    } else {
-      location.href = STORE;
-    }
+    openGame();
   });
+  // Sin esperar al botón: en cuanto carga la página se intenta abrir el juego (o Google Play). El botón
+  // queda como respaldo para los navegadores que no dejan saltar a una app sin un toque.
+  if (ANDROID && (m || md)) {
+    setTimeout(openGame, 60);
+  }
 </script>
 </body>
 </html>
